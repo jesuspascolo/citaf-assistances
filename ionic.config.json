@@ -1,5 +1,7 @@
 {
   "name": "citaf-assitances",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
