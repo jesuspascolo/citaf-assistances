@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
+import {BarcodeScanner, BarcodeScannerOptions} from '@ionic-native/barcode-scanner/ngx';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +9,37 @@ import {Router} from '@angular/router';
 })
 export class HomePage {
 
-  constructor(private router: Router) { }
+  scannedData: {};
+  successfulOperation = false;
+  barcodeScannerOptions: BarcodeScannerOptions;
 
-  navigateToScan() {
-    this.router.navigate(['/qrscanner']);
+  constructor(private barcodeScanner: BarcodeScanner) {
+    this.barcodeScannerOptions = {
+      showTorchButton: true,
+      showFlipCameraButton: true
+    };
+  }
+
+  // navigateToScan() {
+  //   this.router.navigate(['/qrscanner']);
+  // }
+
+  scanCode() {
+    this.barcodeScanner.scan().then(barcodeData => {
+      this.scannedData = barcodeData;
+      this.successfulOperation = true;
+      this.showResultAndRestartCamera();
+    }).catch(err => {
+      console.log('Error', err);
+    });
+  }
+
+  showResultAndRestartCamera() {
+
+  }
+
+  private _reOpenCamera() {
+    this.successfulOperation = false;
+    this.scanCode();
   }
 }

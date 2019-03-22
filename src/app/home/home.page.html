@@ -2,8 +2,16 @@
   <div class="background-img"></div>
   <div class="logo-button">
     <div class="card-content">
-      <img src="../../assets/images/logo_citaf_128.png" class="logo-navigate" alt="logo">
-      <button class="access-button" (click)="navigateToScan()">Acceder</button>
+      <img src="../../assets/images/logo_home.png" class="logo-navigate" alt="logo">
+      <div class="body-page">
+        <div class="spinner">
+          <img src="../../assets/animations/success.gif" class="spinner" alt="success" *ngIf="successfulOperation">
+        </div>
+        <div class="message" *ngIf="scannedData">
+          <span class="success-text">Confirmada asistencia de: <b>{{scannedData['text']}}</b></span>
+        </div>
+      </div>
+      <div class="access-button" (click)="scanCode()"><img src="../../assets/images/scan_button.png" class="scan-button" alt="scan"></div>
       </div>
   </div>
 </ion-content>
